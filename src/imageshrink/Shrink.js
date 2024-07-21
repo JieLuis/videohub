@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./shrink.css";
 
 const Shrink = () => {
   return (

@@ -3,7 +3,10 @@ const createTemplate = require("./accessories/menu");
 const path = require("path");
 const { channels } = require("../src/shared/constants");
 
+process.env.NODE_ENV = "development";
+
 const isMac = process.platform === "darwin";
+const isDev = process.env.NODE_ENV === "production" ? false : true;
 
 const template = createTemplate(isMac);
 
@@ -19,9 +22,12 @@ const createWindow = () => {
 
   window.loadURL(`http://localhost:3000`);
   window.show();
-  window.webContents.openDevTools({
-    mode: "detach",
-  });
+
+  if (isDev) {
+    window.webContents.openDevTools({
+      mode: "detach",
+    });
+  }
 };
 
 const products = {
