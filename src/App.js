@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { channels } from './shared/constants';
-import SearchBar from './components/SearchBar';
-import Shrink from './imageshrink/Shrink';
+import { useState, useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { channels } from "./shared/constants";
+import SearchBar from "./components/SearchBar";
 
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = window.require("electron");
 
 function App() {
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState("");
   const [data, setData] = useState(null);
 
   const getData = () => {
@@ -31,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className='nav-conatiner'>
+        <div className="nav-conatiner">
           <img src={logo} width={200} className="App-logo" alt="logo" />
           <SearchBar />
         </div>
@@ -52,10 +51,7 @@ function App() {
           </ul>
         </>
       )}
-
-      <Shrink />
     </div>
-    
   );
 }
 
