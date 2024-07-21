@@ -23,7 +23,7 @@ h3 {
 }
 
 .App-header {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }

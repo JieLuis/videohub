@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { channels } from './shared/constants';
 import SearchBar from './components/SearchBar';
+import Shrink from './imageshrink/Shrink';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -51,7 +52,10 @@ function App() {
           </ul>
         </>
       )}
+
+      <Shrink />
     </div>
+    
   );
 }
 

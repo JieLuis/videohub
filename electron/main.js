@@ -1,11 +1,11 @@
 const { app, BrowserWindow, ipcMain, Menu } = require("electron");
-const createTemplate  = require('./accessories/menu')
-const path = require('path');
-const { channels } = require('../src/shared/constants');
+const createTemplate = require("./accessories/menu");
+const path = require("path");
+const { channels } = require("../src/shared/constants");
 
+const isMac = process.platform === "darwin";
 
-const isMac = process.platform === 'darwin';
-const template = createTemplate(isMac)
+const template = createTemplate(isMac);
 
 const createWindow = () => {
   const window = new BrowserWindow({
@@ -13,38 +13,36 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     },
   });
 
   window.loadURL(`http://localhost:3000`);
   window.show();
   window.webContents.openDevTools({
-    mode: "detach"
+    mode: "detach",
   });
 };
 
 const products = {
   notebook: {
-    name: 'notebook',
-    price: '2500',
-    color: 'gray',
-    unit: "pound"
+    name: "notebook",
+    price: "2500",
+    color: "gray",
+    unit: "pound",
   },
   headphone: {
-    name: 'headphone',
-    price: '700',
-    color: 'black',
+    name: "headphone",
+    price: "700",
+    color: "black",
   },
 };
 
-
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
-})
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
 
 ipcMain.on(channels.GET_DATA, (event, arg) => {
   const { product } = arg;
@@ -54,11 +52,10 @@ ipcMain.on(channels.GET_DATA, (event, arg) => {
 app.whenReady().then(() => {
   createWindow();
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
 });
 
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
-
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
