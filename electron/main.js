@@ -1,6 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu } = require("electron");
+const createTemplate  = require('./accessories/menu')
 const path = require('path');
 const { channels } = require('../src/shared/constants');
+
+
+const isMac = process.platform === 'darwin';
+const template = createTemplate(isMac)
 
 const createWindow = () => {
   const window = new BrowserWindow({
@@ -14,7 +19,9 @@ const createWindow = () => {
 
   window.loadURL(`http://localhost:3000`);
   window.show();
-  window.webContents.openDevTools();
+  window.webContents.openDevTools({
+    mode: "detach"
+  });
 };
 
 const products = {
@@ -30,6 +37,8 @@ const products = {
     color: 'black',
   },
 };
+
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -49,3 +58,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 });
+
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
+

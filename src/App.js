@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { channels } from './shared/constants';
+import SearchBar from './components/SearchBar';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -29,7 +30,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} width={200} className="App-logo" alt="logo" />
+        <div className='nav-conatiner'>
+          <img src={logo} width={200} className="App-logo" alt="logo" />
+          <SearchBar />
+        </div>
         <input
           onChange={(e) => setProduct(e.target.value)}
           placeholder="Product name"

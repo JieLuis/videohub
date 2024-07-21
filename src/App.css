@@ -1,5 +1,9 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
+  height: 10vh;
+  position: absolute;
+  left: -50px;
+  top: 20px
 }
 
 
@@ -33,6 +37,10 @@ h3 {
   margin-top: 16px;
   cursor: pointer;
   outline: none;
+}
+
+.nav-conatiner {
+  display: flex;
 }
 
 @keyframes App-logo-spin {
