@@ -1,7 +1,11 @@
 const { app, BrowserWindow, ipcMain, Menu } = require("electron");
+const { channels } = require("../src/shared/constants");
 const createTemplate = require("./accessories/menu");
 const path = require("path");
-const { channels } = require("../src/shared/constants");
+const os = require("os");
+// const imagemin = require("imagemin");
+// const imageminMozjpeg = require("imagemin-mozjpeg");
+// const imageminPngquant = require("imagemin-pngquant");
 
 process.env.NODE_ENV = "development";
 
@@ -53,6 +57,10 @@ app.on("window-all-closed", () => {
 ipcMain.on(channels.GET_DATA, (event, arg) => {
   const { product } = arg;
   event.sender.send(channels.GET_DATA, products[product]);
+});
+
+ipcMain.on("image:minimize", (e, options) => {
+  console.log(options);
 });
 
 app.whenReady().then(() => {

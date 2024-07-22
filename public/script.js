@@ -15,5 +15,9 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   const imagePath = img.files[0].path;
   const quality = slider.value;
-  console.log(imagePath, quality);
+
+  ipcRenderer.send("image:minimize", {
+    imagePath,
+    quality,
+  });
 });
