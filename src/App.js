@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { channels } from "./shared/constants";
-import SearchBar from "./components/SearchBar";
+import { channels } from "./shared/constants.js";
+import SearchBar from "./components/SearchBar.js";
 
 const { ipcRenderer } = window.require("electron");
 

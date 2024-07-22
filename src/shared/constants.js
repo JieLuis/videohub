@@ -1,5 +1,3 @@
-module.exports = {
-    channels: {
-      GET_DATA: 'get_data',
-    },
-  };
+export const channels = {
+  GET_DATA: "get_data",
+};

@@ -1,11 +1,12 @@
-const { app, BrowserWindow, ipcMain, Menu } = require("electron");
-const { channels } = require("../src/shared/constants");
-const createTemplate = require("./accessories/menu");
-const path = require("path");
-const os = require("os");
-// const imagemin = require("imagemin");
-// const imageminMozjpeg = require("imagemin-mozjpeg");
-// const imageminPngquant = require("imagemin-pngquant");
+import { app, BrowserWindow, ipcMain, Menu } from "electron";
+import { channels } from "../src/shared/constants.js";
+import createTemplate from "./accessories/menu.js";
+import path from "path";
+import os, { homedir } from "os";
+import imagemin from "imagemin";
+import imageminMozjpeg from "imagemin-mozjpeg";
+import imageminPngquant from "imagemin-pngquant";
+import slash from "slash";
 
 process.env.NODE_ENV = "development";
 
@@ -54,13 +55,16 @@ app.on("window-all-closed", () => {
   }
 });
 
+const shrinkImage = async () => {};
+
 ipcMain.on(channels.GET_DATA, (event, arg) => {
   const { product } = arg;
   event.sender.send(channels.GET_DATA, products[product]);
 });
 
 ipcMain.on("image:minimize", (e, options) => {
-  console.log(options);
+  options.dest = path.join(os.homedir(), "imageshrink");
+  shrinkImage(options);
 });
 
 app.whenReady().then(() => {
