@@ -49,7 +49,6 @@
   },
   "devDependencies": {
     "@electron-forge/plugin-webpack": "^7.4.0",
-    "copyfiles": "^2.4.1",
-    "typescript": "^5.5.3"
+    "copyfiles": "^2.4.1"
   }
 }

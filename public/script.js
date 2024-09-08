@@ -1,9 +1,9 @@
-const path = require("path");
-const os = require("os");
+const { join } = require("path");
+const { homedir } = require("os");
 const { ipcRenderer } = require("electron");
 
-document.getElementById("output-path").innerText = path.join(
-  os.homedir(),
+document.getElementById("output-path").innerText = join(
+  homedir(),
   "imageshrink"
 );
 

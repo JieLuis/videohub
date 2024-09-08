@@ -55,10 +55,10 @@ app.on("window-all-closed", () => {
   }
 });
 
-const shrinkImage = async ({ imgPath, quality, dest }) => {
+const shrinkImage = async ({ imagePath, quality, dest }) => {
   try {
     const pngQuality = quality / 100;
-    const files = await imagemin([slash(imgPath)], {
+    const files = await imagemin([slash(imagePath)], {
       destination: dest,
       plugins: [
         imageminMozjpeg({ quality }),
@@ -70,8 +70,10 @@ const shrinkImage = async ({ imgPath, quality, dest }) => {
 
     console.log(files);
 
-    shell.openItem(dest);
-  } catch {}
+    shell.openPath(dest);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 ipcMain.on(channels.GET_DATA, (event, arg) => {
@@ -94,5 +96,3 @@ app.whenReady().then(() => {
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
-
-// jdlasjldjadj
