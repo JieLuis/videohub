@@ -1,8 +1,8 @@
-import { app, BrowserWindow, ipcMain, Menu } from "electron";
-import { channels } from "../src/shared/constants.js";
+import { app, BrowserWindow, ipcMain, Menu, shell } from "electron";
+import channels from "../src/shared/constants.js";
 import createTemplate from "./accessories/menu.js";
 import path from "path";
-import os, { homedir } from "os";
+import os from "os";
 import imagemin from "imagemin";
 import imageminMozjpeg from "imagemin-mozjpeg";
 import imageminPngquant from "imagemin-pngquant";
@@ -55,7 +55,24 @@ app.on("window-all-closed", () => {
   }
 });
 
-const shrinkImage = async () => {};
+const shrinkImage = async ({ imgPath, quality, dest }) => {
+  try {
+    const pngQuality = quality / 100;
+    const files = await imagemin([slash(imgPath)], {
+      destination: dest,
+      plugins: [
+        imageminMozjpeg({ quality }),
+        imageminPngquant({
+          quality: [pngQuality, pngQuality],
+        }),
+      ],
+    });
+
+    console.log(files);
+
+    shell.openItem(dest);
+  } catch {}
+};
 
 ipcMain.on(channels.GET_DATA, (event, arg) => {
   const { product } = arg;
@@ -77,3 +94,5 @@ app.whenReady().then(() => {
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
+
+// jdlasjldjadj

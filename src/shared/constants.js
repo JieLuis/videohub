@@ -1,3 +1,5 @@
-export const channels = {
+const channels = {
   GET_DATA: "get_data",
 };
+
+export default channels;

@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "electron": "^31.2.0",
     "imagemin": "^9.0.0",
+    "imagemin-jpegtran": "^7.0.0",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
     "nodemon": "^3.1.4",
@@ -25,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "electron .",
-    "watch": "nodemon --exec electron ."
+    "watch": "nodemon --exec electron .",
+    "compile": "tsc && copyfiles -f index.html build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +48,8 @@
     ]
   },
   "devDependencies": {
-    "@electron-forge/plugin-webpack": "^7.4.0"
+    "@electron-forge/plugin-webpack": "^7.4.0",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.5.3"
   }
 }
